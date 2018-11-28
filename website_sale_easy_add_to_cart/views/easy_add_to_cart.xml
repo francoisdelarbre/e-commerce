@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <template id="assets_easy_add_to_cart" name="easy add to cart assets" inherit_id="website.assets_frontend">
+            <xpath expr="." position="inside">
+                <script src="/website_sale_easy_add_to_cart/static/src/js/easy_add_to_cart.js" />
+                <link rel="stylesheet" href="/website_sale_easy_add_to_cart/static/src/css/easy_add_to_cart.css"/>
+            </xpath>
+        </template>
+        <template id="products_easy_add_to_cart" inherit_id="website_sale.products_item"
+                  active="False" customize_show="True" name="Easy Add To Cart">
+            <xpath expr="//div[hasclass('product_price')]" position="after">
+                <t t-if="product.product_variant_ids">
+                    <div class="oe_cart">
+                        <t t-set="product_quantity_in_cart" t-value="website.sale_product_quantity_in_cart(product)[0]"/>
+                        <t t-set="product_variant" t-value="product.product_variant_ids[0]"/>
+                        <!-- TODO : if it's possible, use the tamblates in the statics directlty (/static/src/xml/easy_asdd_to_cart.xml"-->
+                        <div t-if="product_quantity_in_cart" class="easy_add_to_cart in_cart css_quantity input-group oe_website_spinner">
+                            <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json hidden-xs">
+                                <i class="fa fa-minus"></i>
+                            </a>
+                            <input type="text" class="js_quantity form-control quantity prevent-default-enter" t-att-data-product-id="product_variant.id" t-att-value="product_quantity_in_cart" />
+                            <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json hidden-xs">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                        <div t-else="" class="easy_add_to_cart not_in_cart css_quantity input-group oe_website">
+                            <input type="text" class="js_quantity form-control quantity prevent-default-enter" t-att-data-product-id="product_variant.id" t-att-value="1" />
+                            <a class="easy_add_to_cart_btn mb8 input-group-addon btn btn-default fa fa-shopping-cart">
+                            </a>
+                        </div>
+                    </div>
+                </t>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>
