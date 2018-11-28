@@ -1,0 +1,7 @@
+/* TODO: make easy_add_to_cart smaller so that it render well on mobile devices*/
+.easy_add_to_cart .input-group-addon{
+    color : #337ab7;
+}
+.easy_add_to_cart {
+    float : right;
+}

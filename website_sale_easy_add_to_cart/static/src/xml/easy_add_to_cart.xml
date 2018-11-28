@@ -1,0 +1,20 @@
+    <templates id="easy_add_to_cart" xml:space="preserve">
+        <t t-name="not_in_cart_btn">
+                <div class="easy_add_to_cart not_in_cart css_quantity input-group oe_website">
+                        <input type="text" class="js_quantity form-control quantity"  t-att-value="1" />
+                        <a class="easy_add_to_cart_btn mb8 input-group-addon btn btn-default fa fa-shopping-cart">
+                        </a>
+                </div>
+        </t>
+        <t t-name="in_cart_btn">
+            <div t-if="product_quantity_in_cart" class="easy_add_to_cart in_cart css_quantity input-group oe_website_spinner">
+                    <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json hidden-xs">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    <input type="text" class="js_quantity form-control quantity" t-att-data-product-id="product.id" t-att-value="quantity" />
+                    <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json hidden-xs">
+                        <i class="fa fa-plus"></i>
+                    </a>
+            </div>
+        </t>
+    </templates>
