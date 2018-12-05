@@ -1,5 +1,5 @@
+from odoo import api, models
 
-from odoo import api, fiels, models
 
 class Website(models.Model):
     _inherit = 'website'
