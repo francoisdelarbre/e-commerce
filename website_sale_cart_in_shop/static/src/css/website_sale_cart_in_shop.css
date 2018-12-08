@@ -1,0 +1,8 @@
+/* Copyright <YEAR(S)> <AUTHOR(S)>
+ * License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). */
+
+.cart_in_shop {
+    max-width: 70%;
+    overflow-y: auto;
+    background-color: lightskyblue;
+}

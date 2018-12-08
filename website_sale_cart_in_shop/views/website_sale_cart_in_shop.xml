@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+	        <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/website_sale_cart_in_shop/static/src/css/website_sale_cart_in_shop.css"/>
+            </xpath>
+        </template>
+        <template id="cart_in_shop" inherit_id="website_sale.products" active="True" customize_show="True" name="Shopping Cart">
+            <xpath expr="//div[@id='products_grid']" position="after">
+                <div class="cart_in_shop col-md-3 col-sm-4 col-xs-12 border border-info rounded" id="products_grid_after">
+                    <t t-set="website_sale_order" t-value="website.sale_get_order()" />
+                    <t t-call="website_sale.cart_lines"/>
+                </div>
+
+            </xpath>
+        </template>
+    </data>
+</odoo>
