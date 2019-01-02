@@ -91,15 +91,37 @@ $(document).ready(
                     var product_id = parseInt($(this).attr("data-product-id"));
                     var quantity = $(this).val();
 
-                    if(!parseInt(quantity)) {
-                        var $not_in_cart = $(this).parent().replaceWith($.parseHTML(
-                            qweb.render(
-                                "not_in_cart_btn", {
-                                    'product': {'id': product_id},
-                                })
-                        ));
-                        apply_not_in_cart($not_in_cart);
-                    }
+                                        var $easy_add_to_cart = $(this).parent();
+
+                    var $input = $(this);
+                    ajax.jsonRpc("/shop/cart/update_json", "call", {
+                        'product_id': product_id,
+                        'set_qty': quantity
+                    }).then(function (data) {
+                        var new_quantity = parseInt(data.quantity);
+                        console.log("hello");
+                        console.log(new_quantity)
+                        if(!new_quantity) {
+                            console.log("hi")
+                            var $not_in_cart = $easy_add_to_cart.replaceWith($.parseHTML(
+                                qweb.render(
+                                    "not_in_cart_btn", {
+                                        'product': {'id': product_id},
+                                    })
+                            ));
+                            apply_not_in_cart($not_in_cart);
+
+                            return;
+                        }
+
+                        $input.val(new_quantity);
+
+                        $("#cart_total").replaceWith(data['website_sale.cart_lines']);
+                        $("#my_cart .my_cart_quantity").text(data['cart_quantity'])
+
+
+                    });
+
                 });
 
             };
